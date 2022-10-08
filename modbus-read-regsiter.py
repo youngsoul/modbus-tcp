@@ -10,14 +10,14 @@ def current_time():
     now = datetime.now().isoformat()
     return now
 
-host = '192.168.18.20'   #ip of your raspberry pi
+host = '192.168.1.125'  #ip of your raspberry pi
 port = 502
 client = ModbusTcpClient(host, port)
 while True:
     client.connect()
 
-    rr = client.read_holding_registers(1000,1,unit=1)
- 
+    rr = client.read_holding_registers(1000,1,unit=10)
+
     data = {
         "datetime": current_time(),
         "data": rr.registers    # register will return a list. To query individual register specify the array item e.g. registers[0] to get value from first register
